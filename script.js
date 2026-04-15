@@ -176,3 +176,61 @@ function directWhatsApp() {
     const defaultMessage = "Hello Petal & Resin, I would like to place an order.";
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(defaultMessage)}`, '_blank');
 }
+// --- REVIEW CAROUSEL LOGIC ---
+let currentReviewIndex = 0;
+let reviewAutoPlayTimer;
+
+document.addEventListener('DOMContentLoaded', () => {
+    const reviewContainer = document.getElementById('reviewCarouselContainer');
+    
+    if (reviewContainer) {
+        startReviewAutoPlay();
+        window.addEventListener('resize', updateReviewCarousel);
+
+        // Pause on hover or touch
+        reviewContainer.addEventListener('mouseenter', stopReviewAutoPlay);
+        reviewContainer.addEventListener('touchstart', stopReviewAutoPlay);
+
+        // Resume when mouse leaves or touch ends
+        reviewContainer.addEventListener('mouseleave', startReviewAutoPlay);
+        reviewContainer.addEventListener('touchend', startReviewAutoPlay);
+    }
+});
+
+function startReviewAutoPlay() {
+    stopReviewAutoPlay();
+    // Slides every 4 seconds
+    reviewAutoPlayTimer = setInterval(() => { moveReviewSlide(1); }, 4000); 
+}
+
+function stopReviewAutoPlay() {
+    clearInterval(reviewAutoPlayTimer);
+}
+
+function moveReviewSlide(direction) {
+    const cards = document.querySelectorAll('.review-card-wrapper');
+    if (cards.length === 0) return;
+
+    let visibleCards = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+    const maxIndex = cards.length - visibleCards;
+
+    currentReviewIndex += direction;
+
+    // Loop back around
+    if (currentReviewIndex > maxIndex) {
+        currentReviewIndex = 0; 
+    } else if (currentReviewIndex < 0) {
+        currentReviewIndex = maxIndex; 
+    }
+    
+    updateReviewCarousel();
+}
+
+function updateReviewCarousel() {
+    const track = document.getElementById('reviewCarouselTrack');
+    const cards = document.querySelectorAll('.review-card-wrapper');
+    if(cards.length === 0 || !track) return;
+    
+    const cardWidth = cards[0].offsetWidth;
+    track.style.transform = `translateX(-${currentReviewIndex * cardWidth}px)`;
+}
