@@ -168,7 +168,9 @@ footer h2 { color: white; }
     padding-top: 20px; 
 }
 
-.review-author img { 
+/* Styles both images and videos exactly the same */
+.review-author img, 
+.review-author video { 
     width: 60px; 
     height: 60px; 
     border-radius: 50%; 
