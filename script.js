@@ -1,12 +1,9 @@
-// PUT YOUR REAL WHATSAPP NUMBER HERE (Country Code + Number, no + or spaces)
+// PUT YOUR REAL WHATSAPP NUMBER HERE
 const WHATSAPP_NUMBER = "1234567890"; 
-
-let currentSlideIndex = 0;
-let autoPlayTimer; 
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. Mobile Menu Logic ---
+    // 1. Mobile Menu Logic
     const menuIcon = document.getElementById('menu-icon');
     const closeIcon = document.getElementById('close-icon');
     const mobileNav = document.getElementById('mobile-nav');
@@ -17,32 +14,26 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', () => mobileNav.classList.remove('active'));
     });
 
-    // --- 2. Header Opacity/Blur on Scroll ---
+    // 2. Header Scroll Effect
     const header = document.getElementById('main-header');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 10) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
+        if (window.scrollY > 10) { header.classList.add('scrolled'); } 
+        else { header.classList.remove('scrolled'); }
     });
 
-    // --- 3. Scroll Animations ---
-    const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
-    const observer = new IntersectionObserver((entries, observer) => {
+    // 3. Scroll Fade-in Animations
+    const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
+                obs.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.15 });
 
-    document.querySelectorAll('.fade-in-section, .slide-in-left, .slide-in-right').forEach(section => {
-        observer.observe(section);
-    });
+    document.querySelectorAll('.fade-in-section, .slide-in-left, .slide-in-right').forEach(sec => observer.observe(sec));
 
-    // --- 4. Order Form Submission ---
+    // 4. Order Form WhatsApp Submission
     document.getElementById('orderForm').addEventListener('submit', function(e) {
         e.preventDefault(); 
         const name = document.getElementById('name').value;
@@ -50,86 +41,75 @@ document.addEventListener('DOMContentLoaded', () => {
         const product = document.getElementById('product').value;
         const message = document.getElementById('message').value;
 
-        let waMessage = `*New Inquiry from Petal & Resin*%0A%0A*Name:* ${name}%0A*Contact:* ${contact}%0A`;
+        let waMessage = `*New Order from Petal & Resin*%0A%0A*Name:* ${name}%0A*Contact:* ${contact}%0A`;
         if(product) waMessage += `*Product:* ${product}%0A`;
         if(message) waMessage += `*Message:* ${message}%0A`;
 
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${waMessage}`, '_blank');
     });
 
-    // --- 5. Auto-Play Slider with Hover/Touch Pause ---
-    const carouselContainer = document.getElementById('carouselContainer');
+    // 5. Magnify/Zoom Mouse Tracking Logic
+    const zoomContainer = document.getElementById('zoom-container');
+    const zoomImg = document.getElementById('zoom-img');
+
+    zoomContainer.addEventListener('click', function() {
+        this.classList.toggle('is-zoomed');
+        if(!this.classList.contains('is-zoomed')) {
+            zoomImg.style.transformOrigin = 'center center';
+        }
+    });
+
+    zoomContainer.addEventListener('mousemove', function(e) {
+        if (!this.classList.contains('is-zoomed')) return;
+        const rect = this.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        zoomImg.style.transformOrigin = `${x}% ${y}%`;
+    });
     
-    startAutoPlay();
-    updateCarousel();
-    window.addEventListener('resize', updateCarousel);
-
-    // Pause slider on hover or touch
-    carouselContainer.addEventListener('mouseenter', stopAutoPlay);
-    carouselContainer.addEventListener('touchstart', stopAutoPlay);
-
-    // Resume slider when mouse leaves or touch ends
-    carouselContainer.addEventListener('mouseleave', startAutoPlay);
-    carouselContainer.addEventListener('touchend', startAutoPlay);
+    zoomContainer.addEventListener('touchmove', function(e) {
+        if (!this.classList.contains('is-zoomed')) return;
+        e.preventDefault(); 
+        const rect = this.getBoundingClientRect();
+        const touch = e.touches[0];
+        const x = ((touch.clientX - rect.left) / rect.width) * 100;
+        const y = ((touch.clientY - rect.top) / rect.height) * 100;
+        zoomImg.style.transformOrigin = `${x}% ${y}%`;
+    }, {passive: false});
 });
 
-// --- Image Slider Functions ---
-function startAutoPlay() {
-    stopAutoPlay(); // Clear any existing timer first
-    autoPlayTimer = setInterval(() => { moveSlide(1); }, 3000); 
-}
-
-function stopAutoPlay() {
-    clearInterval(autoPlayTimer);
-}
-
-function moveSlide(direction) {
-    const cards = document.querySelectorAll('.card');
-    if (cards.length === 0) return;
-
-    let visibleCards = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
-    const maxIndex = cards.length - visibleCards;
-
-    currentSlideIndex += direction;
-
-    if (currentSlideIndex > maxIndex) {
-        currentSlideIndex = 0; 
-    } else if (currentSlideIndex < 0) {
-        currentSlideIndex = maxIndex; 
-    }
-    updateCarousel();
-}
-
-function updateCarousel() {
-    const track = document.getElementById('carouselTrack');
-    const cards = document.querySelectorAll('.card');
-    if(cards.length === 0) return;
-    
-    const cardWidth = cards[0].offsetWidth;
-    track.style.transform = `translateX(-${currentSlideIndex * cardWidth}px)`;
-}
-
-// --- FULLSCREEN GRID LIGHTBOX FUNCTIONS ---
-function openLightbox() {
-    stopAutoPlay(); 
-    
+// --- LIGHTBOX GRID (Level 1) ---
+function openLightboxGrid(categoryId, categoryName) {
     const lightbox = document.getElementById('lightbox');
     const lightboxGrid = document.getElementById('lightbox-grid');
     
-    lightboxGrid.innerHTML = ''; // Clear grid
+    document.getElementById('lightbox-header-title').innerText = categoryName;
+    lightboxGrid.innerHTML = ''; 
 
-    const allCards = document.querySelectorAll('.card');
+    // Find the hidden data for the clicked category
+    const items = document.querySelectorAll(`#${categoryId} .gallery-data`);
     
-    allCards.forEach(card => {
-        const img = card.querySelector('img');
-        const titleText = card.querySelector('h3').innerText;
+    items.forEach(item => {
+        const imgSrc = item.getAttribute('data-src');
+        const titleText = item.getAttribute('data-title');
 
         const itemDiv = document.createElement('div');
         itemDiv.className = 'lightbox-item';
 
+        const imgWrapper = document.createElement('div');
+        imgWrapper.className = 'img-click-wrapper';
+        imgWrapper.onclick = () => openZoom(imgSrc, titleText);
+
         const newImg = document.createElement('img');
-        newImg.src = img.src;
-        newImg.alt = img.alt;
+        newImg.src = imgSrc;
+        newImg.alt = titleText;
+
+        const hint = document.createElement('div');
+        hint.className = 'hover-magnify';
+        hint.innerHTML = '<i class="fa-solid fa-magnifying-glass-plus"></i>';
+
+        imgWrapper.appendChild(newImg);
+        imgWrapper.appendChild(hint);
 
         const newTitle = document.createElement('h4');
         newTitle.className = 'lightbox-item-title';
@@ -143,21 +123,47 @@ function openLightbox() {
             selectProduct(titleText);  
         };
 
-        itemDiv.appendChild(newImg);
+        itemDiv.appendChild(imgWrapper);
         itemDiv.appendChild(newTitle);
         itemDiv.appendChild(inquireBtn); 
         lightboxGrid.appendChild(itemDiv);
     });
 
     lightbox.style.display = "block";
+    document.body.style.overflow = "hidden"; // Stops the background from scrolling
 }
 
 function closeLightbox() {
     document.getElementById('lightbox').style.display = "none";
-    startAutoPlay(); 
+    document.body.style.overflow = "auto";
 }
 
-// --- Form Pre-fill & WhatsApp ---
+// --- MAGNIFY ZOOM VIEWER (Level 2) ---
+let currentZoomProduct = "";
+
+function openZoom(imgSrc, titleText) {
+    currentZoomProduct = titleText;
+    const zoomImg = document.getElementById('zoom-img');
+    
+    zoomImg.src = imgSrc;
+    document.getElementById('zoom-title').innerText = titleText;
+    document.getElementById('zoom-viewer').style.display = "flex";
+    
+    document.getElementById('zoom-container').classList.remove('is-zoomed');
+    zoomImg.style.transformOrigin = 'center center';
+}
+
+function closeZoom() {
+    document.getElementById('zoom-viewer').style.display = "none";
+}
+
+function buyFromZoom() {
+    closeZoom();       
+    closeLightbox();   
+    selectProduct(currentZoomProduct); 
+}
+
+// --- FORM PRE-FILL ---
 function selectProduct(productName) {
     const productInput = document.getElementById('product');
     productInput.value = productName;
@@ -167,6 +173,6 @@ function selectProduct(productName) {
 }
 
 function directWhatsApp() {
-    const defaultMessage = "Hello Petal & Resin, I would like to inquire about your handcrafted art.";
+    const defaultMessage = "Hello Petal & Resin, I would like to place an order.";
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(defaultMessage)}`, '_blank');
-  }
+}
