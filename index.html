@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruchika Art| Handcrafted Resin Art</title>
+    <title>Ruchika Art | Handcrafted Resin Art</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,9 +13,7 @@
     <header id="main-header">
         <div class="header-container">
             <a href="#" class="logo">Ruchika Art</a>
-            <div class="menu-icon" id="menu-icon">
-                <i class="fa-solid fa-bars"></i>
-            </div>
+            <div class="menu-icon" id="menu-icon"><i class="fa-solid fa-bars"></i></div>
         </div>
     </header>
 
@@ -23,7 +21,7 @@
         <div class="close-icon" id="close-icon"><i class="fa-solid fa-xmark"></i></div>
         <ul>
             <li><a href="#home">Home</a></li>
-            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#collection">Collection</a></li>
             <li><a href="#order">Order</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -36,10 +34,10 @@
             <h1>Ruchika Art</h1>
             <p class="description">Handcrafted resin art blooming with beauty</p>
             <div class="hero-buttons">
-                <a href="#gallery" class="btn btn-outline-light">View Gallery</a>
+                <a href="#collection" class="btn btn-outline-light">View Collection</a>
                 <a href="#order" class="btn btn-primary">Order Now</a>
             </div>
-            <a href="#gallery" class="scroll-down"><i class="fa-solid fa-chevron-down"></i></a>
+            <a href="#collection" class="scroll-down"><i class="fa-solid fa-chevron-down"></i></a>
         </div>
     </section>
 
@@ -47,47 +45,70 @@
         <div class="diamond small"></div><div class="line"></div><div class="diamond large"></div><div class="line"></div><div class="diamond small"></div>
     </div>
 
-    <section id="gallery" class="collection-section fade-in-section">
+    <section id="collection" class="collection-section fade-in-section">
         <p class="section-subtitle">Explore</p>
-        <h2 class="section-title">Our Collection</h2>
-        <p class="section-desc">Swipe or use controls to view our unique blends of nature's finest flowers and handcrafted resin artistry.</p>
+        <h2 class="section-title">Our Collections</h2>
+        <p class="section-desc">Discover our 5 distinct ranges of botanical resin art. Click explore to view the full gallery for each style.</p>
 
-        <div class="carousel-wrapper">
-            <button class="carousel-control prev" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-            <div class="carousel-container" id="carouselContainer">
-                <div class="carousel-track" id="carouselTrack">
-                    
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1638203522692-74892c906660?auto=format&fit=crop&q=80&w=600" alt="Rose Resin Tray">
-                        <div class="card-content">
-                            <h3>Rose Resin Tray</h3>
-                            <button class="btn btn-outline-rose" onclick="selectProduct('Rose Resin Tray')">INQUIRE</button>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&q=80&w=600" alt="Fluid Art Coasters">
-                        <div class="card-content">
-                            <h3>Fluid Art Coasters</h3>
-                            <button class="btn btn-outline-rose" onclick="selectProduct('Fluid Art Coasters')">INQUIRE</button>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&q=80&w=600" alt="Floral Jewelry Dish">
-                        <div class="card-content">
-                            <h3>Floral Jewelry Dish</h3>
-                            <button class="btn btn-outline-rose" onclick="selectProduct('Floral Jewelry Dish')">INQUIRE</button>
-                        </div>
-                    </div>
-
-                </div>
+        <div class="category-banner">
+            <h3 class="category-title">1. Elegant Serving Trays</h3>
+            <p>Handcrafted resin trays infused with preserved botanicals.</p>
+            <button class="btn btn-outline-rose mt-3" onclick="openLightboxGrid('cat-1', 'Elegant Serving Trays')">
+                Explore Trays <i class="fa-solid fa-expand ml-2"></i>
+            </button>
+            
+            <div id="cat-1" style="display: none;">
+                <div class="gallery-data" data-src="https://images.unsplash.com/photo-1638203522692-74892c906660?auto=format&fit=crop&q=80&w=600" data-title="Rose Resin Tray"></div>
+                <div class="gallery-data" data-src="https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&q=80&w=600" data-title="Gold Flake Tray"></div>
             </div>
-            <button class="carousel-control next" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
 
-        <div style="text-align: center; margin-top: 30px;">
-            <button class="btn btn-primary" onclick="openLightbox()">
-                <i class="fa-solid fa-expand" style="margin-right: 8px;"></i> View Full Gallery
+        <div class="category-banner">
+            <h3 class="category-title">2. Botanical Coasters</h3>
+            <p>Sets of 4 intricate floral resin coasters.</p>
+            <button class="btn btn-outline-rose mt-3" onclick="openLightboxGrid('cat-2', 'Botanical Coasters')">
+                Explore Coasters <i class="fa-solid fa-expand ml-2"></i>
             </button>
+            
+            <div id="cat-2" style="display: none;">
+                <div class="gallery-data" data-src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&q=80&w=600" data-title="Fluid Art Coasters"></div>
+            </div>
+        </div>
+
+        <div class="category-banner">
+            <h3 class="category-title">3. Floral Jewelry Dishes</h3>
+            <p>Delicate ring dishes with pressed flowers.</p>
+            <button class="btn btn-outline-rose mt-3" onclick="openLightboxGrid('cat-3', 'Floral Jewelry Dishes')">
+                Explore Dishes <i class="fa-solid fa-expand ml-2"></i>
+            </button>
+            
+            <div id="cat-3" style="display: none;">
+                <div class="gallery-data" data-src="https://images.unsplash.com/photo-1542451313056-b7c8e626645f?auto=format&fit=crop&q=80&w=600" data-title="Rose Petal Dish"></div>
+            </div>
+        </div>
+
+        <div class="category-banner">
+            <h3 class="category-title">4. Statement Wall Art</h3>
+            <p>Large resin panels to bring nature indoors.</p>
+            <button class="btn btn-outline-rose mt-3" onclick="openLightboxGrid('cat-4', 'Statement Wall Art')">
+                Explore Wall Art <i class="fa-solid fa-expand ml-2"></i>
+            </button>
+            
+            <div id="cat-4" style="display: none;">
+                <div class="gallery-data" data-src="https://images.unsplash.com/photo-1621360655180-8703edb11604?auto=format&fit=crop&q=80&w=600" data-title="Botanical Wall Panel"></div>
+            </div>
+        </div>
+
+        <div class="category-banner">
+            <h3 class="category-title">5. Custom Keepsakes</h3>
+            <p>Clocks, bookmarks, and personalized gifts.</p>
+            <button class="btn btn-outline-rose mt-3" onclick="openLightboxGrid('cat-5', 'Custom Keepsakes')">
+                Explore Keepsakes <i class="fa-solid fa-expand ml-2"></i>
+            </button>
+            
+            <div id="cat-5" style="display: none;">
+                <div class="gallery-data" data-src="https://images.unsplash.com/photo-1596464536761-0775a2f5ff5e?auto=format&fit=crop&q=80&w=600" data-title="Resin Floral Clock"></div>
+            </div>
         </div>
     </section>
 
@@ -100,7 +121,7 @@
         <h2 class="section-title">Place an Order</h2>
         <p class="section-desc">Fill in the form below or chat with us directly on WhatsApp</p>
         
-        <button class="btn btn-whatsapp" onclick="directWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</button>
+       <center> <button class="btn btn-whatsapp" onclick="directWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</button></center>
 
         <form id="orderForm" class="order-form">
             <div class="form-group">
@@ -130,12 +151,11 @@
     <section id="contact" class="contact-section">
         <p class="section-subtitle">We'd love to hear from you</p>
         <h2 class="section-title">Get in Touch</h2>
-
         <div class="contact-cards">
             <a href="mailto:petalandresin@gmail.com" class="contact-card slide-in-left">
                 <div class="icon-circle"><i class="fa-regular fa-envelope"></i></div>
                 <h3>Email Us</h3>
-                <p>Ruchika-Art@gmail.com</p>
+                <p>Ruchiaka-Art@gmail.com</p>
             </a>
             <a href="#" onclick="directWhatsApp()" class="contact-card slide-in-right">
                 <div class="icon-circle whatsapp-icon"><i class="fa-brands fa-whatsapp"></i></div>
@@ -146,7 +166,7 @@
     </section>
 
     <footer>
-        <p class="footer-desc">Each piece is handcrafted with love, preserving nature's beauty in resin. Custom orders welcome — tell us your vision and we'll bring it to life.</p>
+        <p class="footer-desc">Each piece is handcrafted with love, preserving nature's beauty in resin.</p>
         <div class="footer-bottom">
             <h2 class="footer-logo">Ruchika Art</h2>
             <p>&copy; 2026 Ruchika Art. All rights reserved.</p>
@@ -155,8 +175,20 @@
 
     <div id="lightbox" class="lightbox">
         <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <div class="lightbox-header">Full Collection</div>
+        <div class="lightbox-header" id="lightbox-header-title">Collection</div>
         <div id="lightbox-grid" class="lightbox-grid"></div>
+    </div>
+
+    <div id="zoom-viewer" class="zoom-viewer">
+        <span class="zoom-close" onclick="closeZoom()">&times;</span>
+        <div class="zoom-title" id="zoom-title">Product Name</div>
+        <div class="zoom-hint"><i class="fa-solid fa-hand-pointer"></i> Click image to magnify & pan</div>
+        
+        <div class="zoom-image-container" id="zoom-container">
+            <img id="zoom-img" src="" alt="Zoom Image">
+        </div>
+        
+        <button class="btn btn-primary zoom-buy-btn" onclick="buyFromZoom()">INQUIRE TO BUY</button>
     </div>
 
     <script src="script.js"></script>
