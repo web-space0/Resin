@@ -121,71 +121,38 @@ footer h2 { color: white; }
 
 @keyframes zoomIn { from {transform:scale(0.95); opacity: 0;} to {transform:scale(1); opacity: 1;} }
 /* --- CUSTOMER REVIEWS --- */
-.reviews-section { padding: 40px 20px; text-align: center; }
-.reviews-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 30px; 
-    max-width: 1200px; 
-    margin: 0 auto; 
-    padding-top: 20px; 
-}
+/* --- CENTER-HIGHLIGHT TESTIMONIAL CAROUSEL --- */
+.testimonials-section { padding: 60px 20px; text-align: center; overflow: hidden; }
 
-.review-card { 
-    background: #fff; 
-    border: 1px solid var(--border-color); 
-    border-radius: 12px; 
-    padding: 30px; 
-    text-align: left; 
-    transition: transform 0.3s, box-shadow 0.3s; 
-}
+.testimonial-carousel-wrapper { display: flex; align-items: center; justify-content: center; max-width: 1200px; margin: 0 auto; position: relative; padding: 40px 0; }
+.testi-viewport { width: 100%; max-width: 1000px; overflow: hidden; cursor: grab; padding: 20px 0; }
+.testi-viewport:active { cursor: grabbing; }
+.testi-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); align-items: center; }
 
-.review-card:hover { 
-    transform: translateY(-5px); 
-    box-shadow: 0 10px 20px rgba(114, 28, 36, 0.05); 
-    border-color: var(--rose-accent); 
-}
+/* Responsive Slide Widths */
+.testi-slide { min-width: 100%; padding: 0 15px; box-sizing: border-box; transition: all 0.6s ease; }
+@media(min-width: 768px) { .testi-slide { min-width: 50%; } }
+@media(min-width: 1024px) { .testi-slide { min-width: 33.333%; } }
 
-.stars { 
-    color: #d4af37; /* Elegant gold color for stars */
-    margin-bottom: 15px; 
-    font-size: 0.9rem; 
-}
+/* Base Card State (Scaled Down & Faded) */
+.testi-card { background: #fff; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); overflow: hidden; transition: all 0.6s ease; opacity: 0.5; transform: scale(0.85); display: flex; flex-direction: column; border: 1px solid var(--border-color); }
 
-.review-text { 
-    font-style: italic; 
-    color: var(--text-light); 
-    margin-bottom: 25px; 
-    line-height: 1.7; 
-    font-size: 0.95rem; 
-}
+/* THE MAGIC: Active Center Card State */
+.testi-slide.active .testi-card { opacity: 1; transform: scale(1.05); box-shadow: 0 15px 35px rgba(114,28,36,0.15); border-color: var(--rose-accent); z-index: 2; position: relative; }
 
-.review-author { 
-    display: flex; 
-    align-items: center; 
-    gap: 15px; 
-    border-top: 1px solid var(--border-color); 
-    padding-top: 20px; 
-}
+/* Big Picture & Content Styling */
+.testi-big-img { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid var(--border-color); }
+.testi-content { padding: 0 25px 30px; text-align: center; display: flex; flex-direction: column; align-items: center; }
 
-/* Styles both images and videos exactly the same */
-.review-author img, 
-.review-author video { 
-    width: 60px; 
-    height: 60px; 
-    border-radius: 50%; 
-    object-fit: cover; 
-    border: 2px solid #fdf8f5; 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-}
+/* Overlapping Avatar Profile */
+.testi-author { display: flex; flex-direction: column; align-items: center; margin-top: -35px; margin-bottom: 15px; }
+.testi-author img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 10px; }
+.testi-author h4 { color: var(--dark-rose); margin: 0 0 2px 0; font-size: 1.1rem; font-family: var(--font-serif); }
+.testi-author span { color: var(--text-light); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
 
-.review-author h4 { 
-    color: var(--dark-rose); 
-    margin-bottom: 3px; 
-    font-size: 1.05rem; 
-}
+.stars { color: #d4af37; margin-bottom: 15px; font-size: 0.9rem; }
+.testi-text { font-style: italic; color: var(--text-light); font-size: 0.95rem; line-height: 1.6; margin: 0; }
 
-.review-author span { 
-    color: var(--text-light); 
-    font-size: 0.8rem; 
-}
+/* Controls */
+.testi-control { background: transparent; color: var(--dark-rose); border: none; font-size: 2rem; cursor: pointer; padding: 10px; z-index: 10; transition: transform 0.2s; }
+.testi-control:hover { transform: scale(1.2); }
