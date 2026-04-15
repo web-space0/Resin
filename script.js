@@ -177,60 +177,67 @@ function directWhatsApp() {
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(defaultMessage)}`, '_blank');
 }
 // --- REVIEW CAROUSEL LOGIC ---
-let currentReviewIndex = 0;
-let reviewAutoPlayTimer;
+// --- CENTER-HIGHLIGHT TESTIMONIAL CAROUSEL LOGIC ---
+let currentTestiIndex = 0;
+let testiAutoPlayTimer;
 
 document.addEventListener('DOMContentLoaded', () => {
-    const reviewContainer = document.getElementById('reviewCarouselContainer');
-    
-    if (reviewContainer) {
-        startReviewAutoPlay();
-        window.addEventListener('resize', updateReviewCarousel);
-
-        // Pause on hover or touch
-        reviewContainer.addEventListener('mouseenter', stopReviewAutoPlay);
-        reviewContainer.addEventListener('touchstart', stopReviewAutoPlay);
-
-        // Resume when mouse leaves or touch ends
-        reviewContainer.addEventListener('mouseleave', startReviewAutoPlay);
-        reviewContainer.addEventListener('touchend', startReviewAutoPlay);
-    }
+    // Start the auto-play when page loads
+    startTestiAutoPlay();
+    updateTestimonialView();
+    window.addEventListener('resize', updateTestimonialView);
 });
 
-function startReviewAutoPlay() {
-    stopReviewAutoPlay();
-    // Slides every 4 seconds
-    reviewAutoPlayTimer = setInterval(() => { moveReviewSlide(1); }, 4000); 
+function startTestiAutoPlay() {
+    stopTestiAutoPlay();
+    testiAutoPlayTimer = setInterval(() => { moveTestimonial(1); }, 4000); 
 }
 
-function stopReviewAutoPlay() {
-    clearInterval(reviewAutoPlayTimer);
+function stopTestiAutoPlay() {
+    clearInterval(testiAutoPlayTimer);
 }
 
-function moveReviewSlide(direction) {
-    const cards = document.querySelectorAll('.review-card-wrapper');
-    if (cards.length === 0) return;
+function moveTestimonial(step) {
+    const slides = document.querySelectorAll('.testi-slide');
+    if (slides.length === 0) return;
 
+    // Calculate how many items are visible based on screen size
     let visibleCards = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
-    const maxIndex = cards.length - visibleCards;
+    const maxIndex = slides.length - visibleCards;
 
-    currentReviewIndex += direction;
+    currentTestiIndex += step;
 
-    // Loop back around
-    if (currentReviewIndex > maxIndex) {
-        currentReviewIndex = 0; 
-    } else if (currentReviewIndex < 0) {
-        currentReviewIndex = maxIndex; 
-    }
+    // Loop around
+    if (currentTestiIndex > maxIndex) currentTestiIndex = 0;
+    if (currentTestiIndex < 0) currentTestiIndex = maxIndex;
     
-    updateReviewCarousel();
+    updateTestimonialView();
 }
 
-function updateReviewCarousel() {
-    const track = document.getElementById('reviewCarouselTrack');
-    const cards = document.querySelectorAll('.review-card-wrapper');
-    if(cards.length === 0 || !track) return;
+function updateTestimonialView() {
+    const track = document.getElementById('testiTrack');
+    const slides = document.querySelectorAll('.testi-slide');
+    if(!track || slides.length === 0) return;
+
+    const slideWidth = slides[0].offsetWidth;
+    const isDesktop = window.innerWidth >= 1024;
     
-    const cardWidth = cards[0].offsetWidth;
-    track.style.transform = `translateX(-${currentReviewIndex * cardWidth}px)`;
+    // 1. Move the track
+    track.style.transform = `translateX(-${currentTestiIndex * slideWidth}px)`;
+
+    // 2. Remove 'active' highlight from all cards
+    slides.forEach(slide => slide.classList.remove('active'));
+    
+    // 3. Figure out which card is in the center and highlight it
+    if (isDesktop) {
+        // On Desktop (3 cards visible), the center card is index + 1
+        if(slides[currentTestiIndex + 1]) {
+            slides[currentTestiIndex + 1].classList.add('active');
+        }
+    } else {
+        // On Mobile/Tablet (1 or 2 cards visible), just highlight the first visible one
+        if(slides[currentTestiIndex]) {
+            slides[currentTestiIndex].classList.add('active');
+        }
+    }
 }
