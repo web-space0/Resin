@@ -120,3 +120,70 @@ footer h2 { color: white; }
 .zoom-buy-btn { margin-top: 30px; padding: 15px 40px; }
 
 @keyframes zoomIn { from {transform:scale(0.95); opacity: 0;} to {transform:scale(1); opacity: 1;} }
+/* --- CUSTOMER REVIEWS --- */
+.reviews-section { padding: 40px 20px; text-align: center; }
+.reviews-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding-top: 20px; 
+}
+
+.review-card { 
+    background: #fff; 
+    border: 1px solid var(--border-color); 
+    border-radius: 12px; 
+    padding: 30px; 
+    text-align: left; 
+    transition: transform 0.3s, box-shadow 0.3s; 
+}
+
+.review-card:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 20px rgba(114, 28, 36, 0.05); 
+    border-color: var(--rose-accent); 
+}
+
+.stars { 
+    color: #d4af37; /* Elegant gold color for stars */
+    margin-bottom: 15px; 
+    font-size: 0.9rem; 
+}
+
+.review-text { 
+    font-style: italic; 
+    color: var(--text-light); 
+    margin-bottom: 25px; 
+    line-height: 1.7; 
+    font-size: 0.95rem; 
+}
+
+.review-author { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+    border-top: 1px solid var(--border-color); 
+    padding-top: 20px; 
+}
+
+.review-author img { 
+    width: 60px; 
+    height: 60px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    border: 2px solid #fdf8f5; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+}
+
+.review-author h4 { 
+    color: var(--dark-rose); 
+    margin-bottom: 3px; 
+    font-size: 1.05rem; 
+}
+
+.review-author span { 
+    color: var(--text-light); 
+    font-size: 0.8rem; 
+}
