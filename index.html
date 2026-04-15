@@ -164,55 +164,80 @@
             </a>
         </div>
     </section>
-    <section id="reviews" class="reviews-section fade-in-section">
-        <p class="section-subtitle">Happy Clients</p>
-        <h2 class="section-title">Customer Reviews</h2>
-        <p class="section-desc">See what our lovely customers have to say about their custom pieces.</p>
+    <section id="testimonials" class="testimonials-section fade-in-section">
+        <p class="section-subtitle">What Our Clients Say</p>
+        <h2 class="section-title">Testimonials</h2>
 
-        <div class="reviews-grid">
+        <div class="testimonial-carousel-wrapper">
+            <button class="testi-control prev" onclick="moveTestimonial(-1)"><i class="fa-solid fa-chevron-left"></i></button>
             
-            <div class="review-card">
-                <div class="stars">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p class="review-text">"Absolutely stunning work! The rose tray I ordered exceeded all my expectations. The details are flawless and it looks beautiful on my coffee table."</p>
-                <div class="review-author">
-                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150" alt="Emily">
-                    <div>
-                        <h4>Emily R.</h4>
-                        <span>Purchased: Elegant Serving Tray</span>
+            <div class="testi-viewport" id="testiViewport" onmouseenter="stopTestiAutoPlay()" onmouseleave="startTestiAutoPlay()" ontouchstart="stopTestiAutoPlay()" ontouchend="startTestiAutoPlay()">
+                <div class="testi-track" id="testiTrack">
+                    
+                    <div class="testi-slide">
+                        <div class="testi-card">
+                            <img class="testi-big-img" src="https://images.unsplash.com/photo-1638203522692-74892c906660?auto=format&fit=crop&q=80&w=600" alt="Rose Resin Tray">
+                            <div class="testi-content">
+                                <div class="testi-author">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150" alt="Emily">
+                                    <h4>Emily R.</h4>
+                                    <span>Purchased: Serving Tray</span>
+                                </div>
+                                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                                <p class="testi-text">"Absolutely stunning work! The rose tray I ordered exceeded all my expectations. The details are flawless and it looks beautiful."</p>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="testi-slide">
+                        <div class="testi-card">
+                            <img class="testi-big-img" src="https://images.unsplash.com/photo-1621360655180-8703edb11604?auto=format&fit=crop&q=80&w=600" alt="Custom Clock">
+                            <div class="testi-content">
+                                <div class="testi-author">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150" alt="Michael">
+                                    <h4>Michael T.</h4>
+                                    <span>Purchased: Custom Clock</span>
+                                </div>
+                                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                                <p class="testi-text">"I ordered a custom clock with my parents' wedding flowers preserved inside. They cried when they saw it. Thank you so much!"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testi-slide">
+                        <div class="testi-card">
+                            <img class="testi-big-img" src="https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&q=80&w=600" alt="Coasters">
+                            <div class="testi-content">
+                                <div class="testi-author">
+                                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150" alt="Sarah">
+                                    <h4>Sarah J.</h4>
+                                    <span>Purchased: Botanical Coasters</span>
+                                </div>
+                                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+                                <p class="testi-text">"The fluid art coasters are exactly what my living room needed. The dark rose colors pop perfectly. Highly recommend this store!"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testi-slide">
+                        <div class="testi-card">
+                            <img class="testi-big-img" src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&q=80&w=600" alt="Ring Dish">
+                            <div class="testi-content">
+                                <div class="testi-author">
+                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150" alt="Chloe">
+                                    <h4>Chloe M.</h4>
+                                    <span>Purchased: Floral Ring Dish</span>
+                                </div>
+                                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                                <p class="testi-text">"Customer service was amazing. She helped me pick the perfect colors to match my bedroom. The jewelry dish is gorgeous."</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="review-card">
-                <div class="stars">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p class="review-text">"I ordered a custom clock for my parents' anniversary with their wedding flowers preserved inside. They cried when they saw it. Thank you so much!"</p>
-                <div class="review-author">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150" alt="Michael">
-                    <div>
-                        <h4>Michael T.</h4>
-                        <span>Purchased: Custom Keepsake Clock</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="review-card">
-                <div class="stars">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-                </div>
-                <p class="review-text">"The fluid art coasters are exactly what my living room needed. The dark rose colors pop perfectly. Highly recommend this store!"</p>
-                <div class="review-author">
-                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150" alt="Sarah">
-                    <div>
-                        <h4>Sarah J.</h4>
-                        <span>Purchased: Botanical Coasters</span>
-                    </div>
-                </div>
-            </div>
-
+            <button class="testi-control next" onclick="moveTestimonial(1)"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
     </section>
 
