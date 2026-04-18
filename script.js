@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.fade-in-section, .slide-in-left, .slide-in-right').forEach(sec => observer.observe(sec));
 
     // 4. Order Form WhatsApp Submission
+    // --- 4. Order Form WhatsApp Submission ---
     document.getElementById('orderForm').addEventListener('submit', function(e) {
         e.preventDefault(); 
         const name = document.getElementById('name').value;
@@ -41,11 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const product = document.getElementById('product').value;
         const message = document.getElementById('message').value;
 
-        let waMessage = `*New Order from Petal & Resin*%0A%0A*Name:* ${name}%0A*Contact:* ${contact}%0A`;
-        if(product) waMessage += `*Product:* ${product}%0A`;
-        if(message) waMessage += `*Message:* ${message}%0A`;
+        // We use \n for new lines here so the encoder can translate them properly
+        let waMessage = `*New Order from Petal & Resin*\n\n*Name:* ${name}\n*Contact:* ${contact}\n`;
+        if(product) waMessage += `*Product:* ${product}\n`;
+        if(message) waMessage += `*Message:* ${message}\n`;
 
-        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${waMessage}`, '_blank');
+        // encodeURIComponent securely packages the '&' and all customer text!
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waMessage)}`, '_blank');
     });
 
     // 5. Magnify/Zoom Mouse Tracking Logic
