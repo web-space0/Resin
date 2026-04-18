@@ -88,7 +88,7 @@ footer h2 { color: white; }
 
 /* --- LIGHTBOX GRID (Level 1) --- */
 .lightbox { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow-y: auto; background-color: rgba(0,0,0,0.95); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-.lightbox-header { text-align: center; color: #E0BFB8; font-family: var(--font-serif); font-size: 2.5rem; padding: 40px 20px 20px; }
+.lightbox-header { text-align: center; color: #D4AF37; font-family: var(--font-serif); font-size: 2.5rem; padding: 40px 20px 20px; }
 .lightbox-close { position: fixed; top: 15px; right: 30px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer; z-index: 2005; }
 .lightbox-close:hover { color: var(--rose-accent); }
 
@@ -102,8 +102,8 @@ footer h2 { color: white; }
 .hover-magnify { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(114,28,36,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; color: white; font-size: 2.5rem; }
 .img-click-wrapper:hover .hover-magnify { opacity: 1; }
 
-.lightbox-item-title { color: #fdf8f5; margin-top: 15px; font-family: var(--font-sans); font-size: 1.1rem; text-align: center; }
-.lightbox-inquire-btn { margin-top: 12px; border: 1px solid var(--rose-accent); color: var(--rose-accent); background: transparent; padding: 8px 24px; border-radius: 25px; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; }
+.lightbox-item-title { color: #CCCCCC; margin-top: 15px; font-family: var(--font-sans); font-size: 1.1rem; text-align: center; }
+.lightbox-inquire-btn { margin-top: 12px; border: 1px solid var(--rose-accent); color: #CCCCCC; background: transparent; padding: 8px 24px; border-radius: 25px; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; }
 .lightbox-inquire-btn:hover { background: var(--rose-accent); color: white; transform: translateY(-2px); }
 
 /* --- ZOOM VIEWER (Level 2) --- */
