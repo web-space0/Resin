@@ -1,5 +1,5 @@
 // PUT YOUR REAL WHATSAPP NUMBER HERE
-const WHATSAPP_NUMBER = "+91 78001 41187"; 
+const WHATSAPP_NUMBER = "917800141187"; 
 
 document.addEventListener('DOMContentLoaded', () => {
 
