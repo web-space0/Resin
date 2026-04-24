@@ -168,3 +168,21 @@ footer h2 { color: white; }
     box-shadow: 0 20px 40px rgba(165, 74, 84, 0.25); 
     border-color: var(--rose-accent);
 }
+
+/* --- UPGRADE 3: CINEMATIC GLASS OVERLAY --- */
+.hover-magnify, .magnify-hint {
+    /* Create a gradient instead of a flat color */
+    background: linear-gradient(to top, rgba(114,28,36,0.9) 0%, rgba(114,28,36,0.1) 100%);
+    backdrop-filter: blur(3px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(3px);
+    
+    /* Move it off-screen to the bottom */
+    transform: translateY(100%); 
+    opacity: 1; /* Override the old fade effect */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Slide it up smoothly on hover */
+.img-click-wrapper:hover .hover-magnify, .img-wrapper:hover .magnify-hint {
+    transform: translateY(0);
+}
