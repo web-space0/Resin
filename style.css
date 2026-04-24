@@ -173,8 +173,8 @@ footer h2 { color: white; }
 .hover-magnify, .magnify-hint {
     /* Create a gradient instead of a flat color */
     background: linear-gradient(to top, rgba(114,28,36,0.9) 0%, rgba(114,28,36,0.1) 100%);
-    backdrop-filter: blur(3px); /* Frosted glass effect */
-    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(2px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(2px);
     
     /* Move it off-screen to the bottom */
     transform: translateY(100%); 
@@ -185,4 +185,45 @@ footer h2 { color: white; }
 /* Slide it up smoothly on hover */
 .img-click-wrapper:hover .hover-magnify, .img-wrapper:hover .magnify-hint {
     transform: translateY(0);
+}
+
+/* --- UPGRADE 6: SOFT SLIDE TEXT REVEAL --- */
+.card-content h3, 
+.card-content .btn {
+    transform: translateY(15px);
+    opacity: 0.7;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Slide them up and make them solid when the card is hovered */
+.card:hover .card-content h3, 
+.card:hover .card-content .btn {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Add a tiny delay to the button so it follows the text smoothly */
+.card-content .btn {
+    transition-delay: 0.05s;
+}
+/* --- UPGRADE 4: RESIN GLOSS SHIMMER --- */
+/* Prepare the image wrapper to hold the light beam */
+.img-click-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    /* Creates a slanted beam of white light */
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    transition: left 0.7s ease-in-out;
+    z-index: 5;
+    pointer-events: none; /* Stops the light beam from blocking clicks */
+}
+
+/* Sweep the light beam across the image on hover */
+.card:hover .img-click-wrapper::after {
+    left: 200%;
 }
