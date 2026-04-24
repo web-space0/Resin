@@ -156,3 +156,15 @@ footer h2 { color: white; }
 /* Controls */
 .testi-control { background: transparent; color: var(--dark-rose); border: none; font-size: 2rem; cursor: pointer; padding: 10px; z-index: 10; transition: transform 0.2s; }
 .testi-control:hover { transform: scale(1.2); }
+
+/* --- UPGRADE 2: FLOATING ART GLOW --- */
+.card, .lightbox-item {
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Gives it a slight "bounce" */
+}
+
+.card:hover, .lightbox-item:hover {
+    transform: translateY(-10px); /* Lifts the card up higher */
+    /* Creates a beautiful dark-rose glowing shadow */
+    box-shadow: 0 20px 40px rgba(165, 74, 84, 0.25); 
+    border-color: var(--rose-accent);
+}
